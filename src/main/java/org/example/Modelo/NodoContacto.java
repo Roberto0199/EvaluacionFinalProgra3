@@ -1,6 +1,9 @@
 package org.example.Modelo;
 
-public class NodoContacto {
+import java.io.Serializable;
+
+public class NodoContacto implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Contacto contacto;
     private NodoContacto izdo;
     private NodoContacto dcho;

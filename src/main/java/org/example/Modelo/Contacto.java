@@ -1,10 +1,20 @@
 package org.example.Modelo;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
 
 public class Contacto {
     private String nombre;
     private long telefono; // Cambio de tipo de dato
+=======
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class Contacto implements Serializable {
+    private static final long serialVersionUID = 1L;
+    private String nombre;
+    private long telefono;
+>>>>>>> 199b9fb (Initial commit)
     private String correoElectronico;
     private LocalDate fechaNacimiento;
 

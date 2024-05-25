@@ -3,9 +3,17 @@ package org.example.Servicio;
 import org.example.Modelo.Contacto;
 import org.example.Modelo.NodoContacto;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
 
 public class Agenda {
+=======
+import java.io.Serializable;
+import java.time.LocalDate;
+
+public class Agenda implements Serializable {
+    private static final long serialVersionUID = 1L;
+>>>>>>> 199b9fb (Initial commit)
     private NodoContacto raiz;
 
     public Agenda() {
@@ -34,6 +42,7 @@ public class Agenda {
             } else {
                 insertar(padre.getDcho(), contacto);
             }
+<<<<<<< HEAD
         }
     }
 
@@ -55,6 +64,41 @@ public class Agenda {
     }
 
     public void eliminarContacto(String nombre) {
+=======
+        } else {
+            throw new IllegalArgumentException("El contacto con el nombre '" + contacto.getNombre() + "' ya existe.");
+        }
+    }
+
+    public Contacto buscarContacto(String criterio) {
+        if (criterio == null || criterio.isEmpty()) {
+            throw new IllegalArgumentException("El criterio no puede estar vacío.");
+        }
+        return buscar(this.raiz, criterio.toLowerCase());
+    }
+
+    private Contacto buscar(NodoContacto nodo, String criterio) {
+        if (nodo == null) {
+            return null;
+        }
+        Contacto contacto = nodo.getContacto();
+        if (contacto.getNombre().toLowerCase().equals(criterio) ||
+                String.valueOf(contacto.getTelefono()).equals(criterio) ||
+                contacto.getCorreoElectronico().toLowerCase().equals(criterio)) {
+            return contacto;
+        }
+        Contacto encontrado = buscar(nodo.getIzdo(), criterio);
+        if (encontrado == null) {
+            encontrado = buscar(nodo.getDcho(), criterio);
+        }
+        return encontrado;
+    }
+
+    public void eliminarContacto(String nombre) {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new IllegalArgumentException("El nombre no puede estar vacío.");
+        }
+>>>>>>> 199b9fb (Initial commit)
         this.raiz = eliminar(this.raiz, nombre);
     }
 
@@ -90,6 +134,7 @@ public class Agenda {
         return actual;
     }
 
+<<<<<<< HEAD
     public void mostrarContactos() {
         inOrden(this.raiz);
     }
@@ -105,3 +150,26 @@ public class Agenda {
         }
     }
 }
+=======
+    public String obtenerContactosString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        obtenerContactosString(this.raiz, stringBuilder);
+        return stringBuilder.toString();
+    }
+
+    private void obtenerContactosString(NodoContacto nodo, StringBuilder stringBuilder) {
+        if (nodo != null) {
+            obtenerContactosString(nodo.getIzdo(), stringBuilder);
+            stringBuilder.append("Nombre: ").append(nodo.getContacto().getNombre())
+                    .append(", Teléfono: ").append(nodo.getContacto().getTelefono())
+                    .append(", Correo: ").append(nodo.getContacto().getCorreoElectronico())
+                    .append(", Fecha de Nacimiento: ").append(nodo.getContacto().getFechaNacimiento())
+                    .append("\n");
+            obtenerContactosString(nodo.getDcho(), stringBuilder);
+        }
+    }
+
+    public void mostrarContactos() {
+    }
+}
+>>>>>>> 199b9fb (Initial commit)
